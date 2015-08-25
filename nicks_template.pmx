@@ -1,0 +1,26 @@
+---
+name: nicks_template
+description: ''
+keywords: ''
+type: Default
+documentation: ''
+images:
+- name: re
+  source: re:latest
+  category: res
+  type: Default
+  volumes_from:
+  - service: volume
+- name: percona
+  source: nick/mysql:latest
+  category: dbs
+  type: Default
+  volumes_from:
+  - service: volume
+- name: volume
+  source: nick/re:latest
+  category: volumes
+  type: Default
+  volumes:
+  - host_path: ''
+    container_path: "/shared"
