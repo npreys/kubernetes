@@ -1,0 +1,31 @@
+---
+name: nick/re_mysql_volume
+description: ''
+keywords: ''
+type: Default
+documentation: ''
+images:
+- name: re_1
+  source: re:latest
+  category: res
+  type: Default
+  volumes_from:
+  - service: volume_1
+- name: volume_1
+  source: nick/re:latest
+  category: volumes
+  type: Default
+  volumes:
+  - host_path: ''
+    container_path: "/shared"
+- name: percona_1
+  source: nick/mysql:latest
+  category: dbs
+  type: Default
+  environment:
+  - variable: MYSQL_ROOT_PASSWORD
+    value: root
+  - variable: MYSQL_DATABASE
+    value: stableV5
+  volumes_from:
+  - service: volume_1
