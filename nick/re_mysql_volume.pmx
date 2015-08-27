@@ -5,13 +5,24 @@ keywords: ''
 type: Default
 documentation: ''
 images:
-- name: nick_volume
+- name: nick_volume_2
   source: nick/volume:latest
-  type: Default
-- name: nick_mysql
-  source: nick/mysql:latest
-  type: Default
-- name: nick_re
-  source: nick/re:latest
   category: Volumes
   type: Default
+- name: nick_mysql_2
+  source: nick/mysql:latest
+  category: DBs
+  type: Default
+  environment:
+  - variable: MYSQL_ROOT_PASSWORD
+    value: root
+  - variable: MYSQL_DATABASE
+    value: stableV5
+  volumes_from:
+  - service: nick_volume_2
+- name: nick_re_2
+  source: nick/re:latest
+  category: REs
+  type: Default
+  volumes_from:
+  - service: nick_volume_2
